@@ -1,0 +1,162 @@
+[Staff]   Queue EMPTY. Waiting for reservations...
+[Student] Submitted reservation #1 for book 8 (queue 1/5)
+[Staff]   Processing reservation #1 for book 8...
+[Student] Submitted reservation #2 for book 3 (queue 1/5)
+[Student] Submitted reservation #3 for book 8 (queue 2/5)
+
+========== MONITOR REPORT ==========
+  Total submitted : 3
+  Total processed : 0
+  Approved        : 0
+  Rejected        : 0
+  Queue size      : 2/5
+=====================================
+
+[Staff]   Reservation #1 APPROVED (book 8 available)
+[Staff]   Processing reservation #2 for book 3...
+[Student] Submitted reservation #4 for book 4 (queue 2/5)
+[Student] Submitted reservation #5 for book 7 (queue 3/5)
+[Student] Submitted reservation #6 for book 2 (queue 4/5)
+[Staff]   Reservation #2 REJECTED (book 3 unavailable)
+[Staff]   Processing reservation #3 for book 8...
+[Student] Submitted reservation #7 for book 18 (queue 4/5)
+
+========== MONITOR REPORT ==========
+  Total submitted : 7
+  Total processed : 2
+  Approved        : 1
+  Rejected        : 1
+  Queue size      : 4/5
+=====================================
+
+[Student] Submitted reservation #8 for book 16 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #9 (book 17) is waiting...
+[Staff]   Reservation #3 APPROVED (book 8 available)
+[Staff]   Processing reservation #4 for book 4...
+[Student] Submitted reservation #9 for book 17 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #10 (book 9) is waiting...
+
+========== MONITOR REPORT ==========
+  Total submitted : 9
+  Total processed : 3
+  Approved        : 2
+  Rejected        : 1
+  Queue size      : 5/5
+=====================================
+
+[Staff]   Reservation #4 APPROVED (book 4 available)
+[Staff]   Processing reservation #5 for book 7...
+[Student] Submitted reservation #10 for book 9 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #11 (book 4) is waiting...
+
+========== MONITOR REPORT ==========
+  Total submitted : 10
+  Total processed : 4
+  Approved        : 3
+  Rejected        : 1
+  Queue size      : 5/5
+=====================================
+
+[Staff]   Reservation #5 REJECTED (book 7 unavailable)
+[Staff]   Processing reservation #6 for book 2...
+[Student] Submitted reservation #11 for book 4 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #12 (book 14) is waiting...
+[Staff]   Reservation #6 APPROVED (book 2 available)
+[Staff]   Processing reservation #7 for book 18...
+[Student] Submitted reservation #12 for book 14 (queue 5/5)
+
+========== MONITOR REPORT ==========
+  Total submitted : 12
+  Total processed : 6
+  Approved        : 4
+  Rejected        : 2
+  Queue size      : 5/5
+=====================================
+
+[Student] Queue FULL (5/5). Reservation #13 (book 7) is waiting...
+[Staff]   Reservation #7 APPROVED (book 18 available)
+[Staff]   Processing reservation #8 for book 16...
+[Student] Submitted reservation #13 for book 7 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #14 (book 14) is waiting...
+
+========== MONITOR REPORT ==========
+  Total submitted : 13
+  Total processed : 7
+  Approved        : 5
+  Rejected        : 2
+  Queue size      : 5/5
+=====================================
+
+[Staff]   Reservation #8 APPROVED (book 16 available)
+[Staff]   Processing reservation #9 for book 17...
+[Student] Submitted reservation #14 for book 14 (queue 5/5)
+[Student] Queue FULL (5/5). Reservation #15 (book 5) is waiting...
+
+========== MONITOR REPORT ==========
+  Total submitted : 14
+  Total processed : 8
+  Approved        : 6
+  Rejected        : 2
+  Queue size      : 5/5
+=====================================
+
+[Staff]   Reservation #9 REJECTED (book 17 unavailable)
+[Staff]   Processing reservation #10 for book 9...
+[Student] Submitted reservation #15 for book 5 (queue 5/5)
+[Staff]   Reservation #10 REJECTED (book 9 unavailable)
+[Staff]   Processing reservation #11 for book 4...
+
+========== MONITOR REPORT ==========
+  Total submitted : 15
+  Total processed : 10
+  Approved        : 6
+  Rejected        : 4
+  Queue size      : 4/5
+=====================================
+
+[Staff]   Reservation #11 APPROVED (book 4 available)
+[Staff]   Processing reservation #12 for book 14...
+
+========== MONITOR REPORT ==========
+  Total submitted : 15
+  Total processed : 11
+  Approved        : 7
+  Rejected        : 4
+  Queue size      : 3/5
+=====================================
+
+[Staff]   Reservation #12 APPROVED (book 14 available)
+[Staff]   Processing reservation #13 for book 7...
+
+========== MONITOR REPORT ==========
+  Total submitted : 15
+  Total processed : 12
+  Approved        : 8
+  Rejected        : 4
+  Queue size      : 2/5
+=====================================
+
+[Staff]   Reservation #13 REJECTED (book 7 unavailable)
+[Staff]   Processing reservation #14 for book 14...
+[Staff]   Reservation #14 APPROVED (book 14 available)
+[Staff]   Processing reservation #15 for book 5...
+
+========== MONITOR REPORT ==========
+  Total submitted : 15
+  Total processed : 14
+  Approved        : 9
+  Rejected        : 5
+  Queue size      : 0/5
+=====================================
+
+[Staff]   Reservation #15 REJECTED (book 5 unavailable)
+
+========== FINAL REPORT ==========
+  Total submitted : 15
+  Total processed : 15
+  Approved        : 9
+  Rejected        : 6
+  Queue size      : 0/5
+=====================================
+
+All reservations processed. Program finished.

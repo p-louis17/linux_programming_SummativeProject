@@ -1,0 +1,17 @@
+Connected to registration server at 127.0.0.1:9090
+Enter your student ID: Authentication successful. Welcome, S1001.
+
+Available events
+ID     Name                       Taken    Status
+101    AI Workshop                0/5      open
+102    Cybersecurity Seminar      8/4      FULL
+103    Research Conference        0/6      open
+
+Enter an event ID to register, L to list events, Q to quit: 
+Available events
+ID     Name                       Taken    Status
+101    AI Workshop                0/5      open
+102    Cybersecurity Seminar      8/4      FULL
+103    Research Conference        0/6      open
+
+Enter an event ID to register, L to list events, Q to quit: Registration session closed. Goodbye, S1001.

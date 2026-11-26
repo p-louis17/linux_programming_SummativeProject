@@ -1,0 +1,16 @@
+Connected to registration server at 127.0.0.1:9091
+Enter your student ID: Authentication successful. Welcome, S1001.
+
+Available events
+ID     Name                       Taken    Status
+101    AI Workshop                0/5      open
+102    Cybersecurity Seminar      0/4      open
+103    Research Conference        0/6      open
+
+Enter an event ID to register, L to list events, Q to quit: Success: Registered for AI Workshop (1/5 places taken)
+
+Enter an event ID to register, L to list events, Q to quit: Duplicate registration: You are already registered for AI Workshop
+
+Enter an event ID to register, L to list events, Q to quit: Event unavailable: No event with ID 999
+
+Enter an event ID to register, L to list events, Q to quit: Registration session closed. Goodbye, S1001.

@@ -1,0 +1,98 @@
+[server] loaded 8 registered students from students.txt
+[server] listening on port 9091
+[server] connected clients: 127.0.0.1:34844(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34844 connected
+[auth] 127.0.0.1:34844 rejected, unknown ID 'S9999'
+[thread] client 127.0.0.1:34844 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34846(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34846 connected
+[server] connected clients: 127.0.0.1:34846(S1001) (total 1)
+[auth] 127.0.0.1:34846 authenticated as S1001
+[register] S1001 registered for 101 AI Workshop (1/5)
+[register] S1001 duplicate attempt for 101 AI Workshop
+[register] S1001 asked for unknown event 999
+[thread] client 127.0.0.1:34846 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34854(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34854 connected
+[server] connected clients: 127.0.0.1:34854(S1002) (total 1)
+[auth] 127.0.0.1:34854 authenticated as S1002
+[register] S1002 registered for 102 Cybersecurity Seminar (1/4)
+[thread] client 127.0.0.1:34854 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34868(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34868 connected
+[server] connected clients: 127.0.0.1:34868(S1003) (total 1)
+[auth] 127.0.0.1:34868 authenticated as S1003
+[register] S1003 registered for 102 Cybersecurity Seminar (2/4)
+[thread] client 127.0.0.1:34868 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34872(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34872 connected
+[server] connected clients: 127.0.0.1:34872(S1004) (total 1)
+[auth] 127.0.0.1:34872 authenticated as S1004
+[register] S1004 registered for 102 Cybersecurity Seminar (3/4)
+[thread] client 127.0.0.1:34872 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34884(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34884 connected
+[server] connected clients: 127.0.0.1:34884(S1005) (total 1)
+[auth] 127.0.0.1:34884 authenticated as S1005
+[register] S1005 registered for 102 Cybersecurity Seminar (4/4)
+[thread] client 127.0.0.1:34884 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34892(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34892 connected
+[server] connected clients: 127.0.0.1:34892(S1006) (total 1)
+[auth] 127.0.0.1:34892 authenticated as S1006
+[register] S1006 rejected, 102 Cybersecurity Seminar is full
+[thread] client 127.0.0.1:34892 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34906(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34906 connected
+[server] connected clients: 127.0.0.1:34906(S1001) (total 1)
+[auth] 127.0.0.1:34906 authenticated as S1001
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(unauthenticated) (total 2)
+[thread] client 127.0.0.1:34920 connected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) (total 2)
+[auth] 127.0.0.1:34920 authenticated as S1002
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(unauthenticated) (total 3)
+[thread] client 127.0.0.1:34926 connected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) (total 3)
+[auth] 127.0.0.1:34926 authenticated as S1004
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) 127.0.0.1:34928(unauthenticated) (total 4)
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) 127.0.0.1:34928(unauthenticated) 127.0.0.1:34930(unauthenticated) (total 5)
+[thread] client 127.0.0.1:34928 connected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) 127.0.0.1:34928(S1003) 127.0.0.1:34930(unauthenticated) (total 5)
+[auth] 127.0.0.1:34928 authenticated as S1003
+[thread] client 127.0.0.1:34930 connected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) 127.0.0.1:34928(S1003) 127.0.0.1:34930(S1005) (total 5)
+[auth] 127.0.0.1:34930 authenticated as S1005
+[register] S1003 registered for 103 Research Conference (1/6)
+[thread] client 127.0.0.1:34928 disconnected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34920(S1002) 127.0.0.1:34926(S1004) 127.0.0.1:34930(S1005) (total 4)
+[register] S1002 registered for 103 Research Conference (2/6)
+[register] S1005 registered for 103 Research Conference (3/6)
+[thread] client 127.0.0.1:34920 disconnected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34926(S1004) 127.0.0.1:34930(S1005) (total 3)
+[thread] client 127.0.0.1:34930 disconnected
+[server] connected clients: 127.0.0.1:34906(S1001) 127.0.0.1:34926(S1004) (total 2)
+[register] S1004 registered for 103 Research Conference (4/6)
+[thread] client 127.0.0.1:34926 disconnected
+[server] connected clients: 127.0.0.1:34906(S1001) (total 1)
+[register] S1001 registered for 103 Research Conference (5/6)
+[thread] client 127.0.0.1:34906 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:34938(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34938 connected
+[server] connected clients: 127.0.0.1:34938(S1008) (total 1)
+[auth] 127.0.0.1:34938 authenticated as S1008
+[thread] client 127.0.0.1:34938 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:37446(unauthenticated) (total 1)
+[thread] client 127.0.0.1:37446 connected
+[server] connected clients: 127.0.0.1:37446(S1001) (total 1)
+[auth] 127.0.0.1:37446 authenticated as S1001
+[thread] client 127.0.0.1:37446 disconnected
+[server] connected clients: (total 0)

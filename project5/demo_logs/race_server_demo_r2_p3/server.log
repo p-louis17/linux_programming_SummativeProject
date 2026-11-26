@@ -1,0 +1,44 @@
+[server] DEMO build: registration pauses 150 ms inside the critical step
+[server] loaded 8 registered students from students.txt
+[server] listening on port 9090
+[server] connected clients: 127.0.0.1:42820(unauthenticated) (total 1)
+[thread] client 127.0.0.1:42820 connected
+[server] connected clients: 127.0.0.1:42820(S1001) (total 1)
+[auth] 127.0.0.1:42820 authenticated as S1001
+[register] S1001 registered for 102 Cybersecurity Seminar (1/4)
+[thread] client 127.0.0.1:42820 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:42826(unauthenticated) (total 1)
+[thread] client 127.0.0.1:42826 connected
+[server] connected clients: 127.0.0.1:42826(S1002) (total 1)
+[auth] 127.0.0.1:42826 authenticated as S1002
+[register] S1002 registered for 102 Cybersecurity Seminar (2/4)
+[thread] client 127.0.0.1:42826 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:42838(unauthenticated) (total 1)
+[thread] client 127.0.0.1:42838 connected
+[server] connected clients: 127.0.0.1:42838(S1003) (total 1)
+[auth] 127.0.0.1:42838 authenticated as S1003
+[register] S1003 registered for 102 Cybersecurity Seminar (3/4)
+[thread] client 127.0.0.1:42838 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:42848(unauthenticated) (total 1)
+[thread] client 127.0.0.1:42848 connected
+[server] connected clients: 127.0.0.1:42848(S1004) (total 1)
+[auth] 127.0.0.1:42848 authenticated as S1004
+[server] connected clients: 127.0.0.1:42848(S1004) 127.0.0.1:42858(unauthenticated) (total 2)
+[thread] client 127.0.0.1:42858 connected
+[server] connected clients: 127.0.0.1:42848(S1004) 127.0.0.1:42858(S1005) (total 2)
+[auth] 127.0.0.1:42858 authenticated as S1005
+[register] S1004 registered for 102 Cybersecurity Seminar (4/4)
+[register] S1005 rejected, 102 Cybersecurity Seminar is full
+[thread] client 127.0.0.1:42848 disconnected
+[server] connected clients: 127.0.0.1:42858(S1005) (total 1)
+[thread] client 127.0.0.1:42858 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:42874(unauthenticated) (total 1)
+[thread] client 127.0.0.1:42874 connected
+[server] connected clients: 127.0.0.1:42874(S1001) (total 1)
+[auth] 127.0.0.1:42874 authenticated as S1001
+[thread] client 127.0.0.1:42874 disconnected
+[server] connected clients: (total 0)

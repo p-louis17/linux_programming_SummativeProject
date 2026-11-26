@@ -1,0 +1,20 @@
+=== Race test: server_demo, 2 racers, 3 seats pre-filled, event 102 capacity 4 ===
+All 2 clients are connected and authenticated. Releasing the barrier now.
+
+--- Server log: registration decisions ---
+[register] S1001 registered for 102 Cybersecurity Seminar (1/4)
+[register] S1002 registered for 102 Cybersecurity Seminar (2/4)
+[register] S1003 registered for 102 Cybersecurity Seminar (3/4)
+[register] S1004 registered for 102 Cybersecurity Seminar (4/4)
+[register] S1005 rejected, 102 Cybersecurity Seminar is full
+
+--- What each racing client was told ---
+S1004: Success: Registered for Cybersecurity Seminar (4/4 places taken)
+S1005: Event full: Cybersecurity Seminar is full (4/4)
+
+--- Summary ---
+Registrations accepted for event 102: 4 (capacity 4)
+Registrations rejected as full:          1
+Final event table from the audit client:
+102    Cybersecurity Seminar      4/4      FULL
+RESULT: PASS, capacity was never exceeded

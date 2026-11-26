@@ -1,0 +1,39 @@
+[server] DEMO build: registration pauses 150 ms inside the critical step
+[server] WARNING: NO_LOCK build, registration is NOT protected by a mutex
+[server] loaded 8 registered students from students.txt
+[server] listening on port 9090
+[server] connected clients: 127.0.0.1:43006(unauthenticated) (total 1)
+[thread] client 127.0.0.1:43006 connected
+[server] connected clients: 127.0.0.1:43006(S1001) (total 1)
+[auth] 127.0.0.1:43006 authenticated as S1001
+[register] S1001 registered for 102 Cybersecurity Seminar (1/4)
+[thread] client 127.0.0.1:43006 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:43018(unauthenticated) (total 1)
+[thread] client 127.0.0.1:43018 connected
+[server] connected clients: 127.0.0.1:43018(S1002) (total 1)
+[auth] 127.0.0.1:43018 authenticated as S1002
+[register] S1002 registered for 102 Cybersecurity Seminar (2/4)
+[thread] client 127.0.0.1:43018 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:43032(unauthenticated) (total 1)
+[thread] client 127.0.0.1:43032 connected
+[server] connected clients: 127.0.0.1:43032(S1003) (total 1)
+[auth] 127.0.0.1:43032 authenticated as S1003
+[register] S1003 registered for 102 Cybersecurity Seminar (3/4)
+[thread] client 127.0.0.1:43032 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:43038(unauthenticated) (total 1)
+[thread] client 127.0.0.1:43038 connected
+[server] connected clients: 127.0.0.1:43038(S1004) (total 1)
+[auth] 127.0.0.1:43038 authenticated as S1004
+[server] connected clients: 127.0.0.1:43038(S1004) 127.0.0.1:43044(unauthenticated) (total 2)
+[thread] client 127.0.0.1:43044 connected
+[server] connected clients: 127.0.0.1:43038(S1004) 127.0.0.1:43044(S1005) (total 2)
+[auth] 127.0.0.1:43044 authenticated as S1005
+[register] S1004 registered for 102 Cybersecurity Seminar (4/4)
+[register] S1005 registered for 102 Cybersecurity Seminar (5/4)
+[thread] client 127.0.0.1:43038 disconnected
+[server] connected clients: 127.0.0.1:43044(S1005) (total 1)
+[thread] client 127.0.0.1:43044 disconnected
+[server] connected clients: (total 0)

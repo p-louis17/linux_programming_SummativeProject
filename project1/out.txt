@@ -1,0 +1,4 @@
+Transactions processed: 5
+Total deposits:         800
+Total withdrawals:      700
+Final balance:          100

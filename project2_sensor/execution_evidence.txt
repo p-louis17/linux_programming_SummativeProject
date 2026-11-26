@@ -1,0 +1,120 @@
+==================================================
+TEST: Assignment example (valid and invalid mixed)
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+25$
+30$
+invalid$
+18$
+42$
+-5$
+
+--- output ---
+Total records: 6
+Valid measurements: 4
+Invalid measurements: 2
+Sum of valid measurements: 115
+Minimum measurement: 18
+Maximum measurement: 42
+exit status: 0
+
+==================================================
+TEST: All valid
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+10$
+20$
+30$
+
+--- output ---
+Total records: 3
+Valid measurements: 3
+Invalid measurements: 0
+Sum of valid measurements: 60
+Minimum measurement: 10
+Maximum measurement: 30
+exit status: 0
+
+==================================================
+TEST: Empty lines and Windows CRLF endings
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+10^M$
+^M$
+100^M$
+101^M$
+abc^M$
+0^M$
+
+--- output ---
+Total records: 6
+Valid measurements: 3
+Invalid measurements: 3
+Sum of valid measurements: 110
+Minimum measurement: 0
+Maximum measurement: 100
+exit status: 0
+
+==================================================
+TEST: Range boundaries and leading zeros
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+0$
+100$
+101$
+-1$
+007$
+99$
+
+--- output ---
+Total records: 6
+Valid measurements: 4
+Invalid measurements: 2
+Sum of valid measurements: 206
+Minimum measurement: 0
+Maximum measurement: 100
+exit status: 0
+
+==================================================
+TEST: Last line has no trailing newline
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+5$
+7
+--- output ---
+Total records: 2
+Valid measurements: 2
+Invalid measurements: 0
+Sum of valid measurements: 12
+Minimum measurement: 5
+Maximum measurement: 7
+exit status: 0
+
+==================================================
+TEST: No valid measurements
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+x$
+$
+-1$
+
+--- output ---
+Total records: 3
+Valid measurements: 0
+Invalid measurements: 3
+Sum of valid measurements: 0
+Minimum measurement: N/A
+Maximum measurement: N/A
+exit status: 0
+
+==================================================
+TEST: Empty file
+--- input (cat -A shows $ at line ends and ^M for CR) ---
+
+--- output ---
+Total records: 0
+Valid measurements: 0
+Invalid measurements: 0
+Sum of valid measurements: 0
+Minimum measurement: N/A
+Maximum measurement: N/A
+exit status: 0
+
+==================================================
+TEST: Missing input file
+Error: cannot open sensor_readings.txt
+exit status: 1

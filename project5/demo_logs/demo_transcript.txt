@@ -1,0 +1,68 @@
+
+==============================================================
+1. Unsuccessful authentication (unknown ID S9999)
+==============================================================
+Connected to registration server at 127.0.0.1:9091
+Enter your student ID: Authentication failed: Unknown student ID
+
+==============================================================
+2. Successful authentication, event list, registration, duplicate, unknown event, graceful quit (S1001)
+==============================================================
+Connected to registration server at 127.0.0.1:9091
+Enter your student ID: Authentication successful. Welcome, S1001.
+
+Available events
+ID     Name                       Taken    Status
+101    AI Workshop                0/5      open
+102    Cybersecurity Seminar      0/4      open
+103    Research Conference        0/6      open
+
+Enter an event ID to register, L to list events, Q to quit: Success: Registered for AI Workshop (1/5 places taken)
+
+Enter an event ID to register, L to list events, Q to quit: Duplicate registration: You are already registered for AI Workshop
+
+Enter an event ID to register, L to list events, Q to quit: Event unavailable: No event with ID 999
+
+Enter an event ID to register, L to list events, Q to quit: Registration session closed. Goodbye, S1001.
+
+==============================================================
+3. Registering for an event that is already full (Cybersecurity Seminar, capacity 4)
+==============================================================
+S1002: Success: Registered for Cybersecurity Seminar (1/4 places taken)
+S1003: Success: Registered for Cybersecurity Seminar (2/4 places taken)
+S1004: Success: Registered for Cybersecurity Seminar (3/4 places taken)
+S1005: Success: Registered for Cybersecurity Seminar (4/4 places taken)
+S1006: Event full: Cybersecurity Seminar is full (4/4)
+
+==============================================================
+4. Five simultaneous clients, all registering for the Research Conference (capacity 6)
+==============================================================
+S1001: Success: Registered for Research Conference (5/6 places taken)
+S1002: Success: Registered for Research Conference (2/6 places taken)
+S1003: Success: Registered for Research Conference (1/6 places taken)
+S1004: Success: Registered for Research Conference (4/6 places taken)
+S1005: Success: Registered for Research Conference (3/6 places taken)
+
+Highest number of clients connected at the same time (from the server log): 5
+RESULT: PASS, at least five simultaneous connections
+
+==============================================================
+5. Unexpected client disconnection (S1008 killed with kill -9, no QUIT sent)
+==============================================================
+Client S1008 is connected. Killing it abruptly now.
+
+Server log lines written since then:
+[server] connected clients: 127.0.0.1:34938(unauthenticated) (total 1)
+[thread] client 127.0.0.1:34938 connected
+[server] connected clients: 127.0.0.1:34938(S1008) (total 1)
+[auth] 127.0.0.1:34938 authenticated as S1008
+[thread] client 127.0.0.1:34938 disconnected
+[server] connected clients: (total 0)
+
+The server is still alive: a new client connects and sees the event table.
+ID     Name                       Taken    Status
+101    AI Workshop                1/5      open
+102    Cybersecurity Seminar      4/4      FULL
+103    Research Conference        5/6      open
+
+Logs saved in demo_logs/functional/

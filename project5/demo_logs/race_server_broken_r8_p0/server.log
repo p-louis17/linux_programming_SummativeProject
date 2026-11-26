@@ -1,0 +1,66 @@
+[server] DEMO build: registration pauses 150 ms inside the critical step
+[server] WARNING: NO_LOCK build, registration is NOT protected by a mutex
+[server] loaded 8 registered students from students.txt
+[server] listening on port 9090
+[server] connected clients: 127.0.0.1:56780(unauthenticated) (total 1)
+[thread] client 127.0.0.1:56780 connected
+[server] connected clients: 127.0.0.1:56780(S1001) (total 1)
+[auth] 127.0.0.1:56780 authenticated as S1001
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(unauthenticated) (total 2)
+[thread] client 127.0.0.1:56782 connected
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) (total 2)
+[auth] 127.0.0.1:56782 authenticated as S1002
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(unauthenticated) (total 3)
+[thread] client 127.0.0.1:56796 connected
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) (total 3)
+[auth] 127.0.0.1:56796 authenticated as S1003
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(unauthenticated) (total 4)
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(unauthenticated) 127.0.0.1:56804(unauthenticated) (total 5)
+[thread] client 127.0.0.1:56804 connected
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(unauthenticated) 127.0.0.1:56804(S1005) (total 5)
+[auth] 127.0.0.1:56804 authenticated as S1005
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(unauthenticated) 127.0.0.1:56804(S1005) 127.0.0.1:56816(unauthenticated) (total 6)
+[thread] client 127.0.0.1:56798 connected
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(unauthenticated) (total 6)
+[auth] 127.0.0.1:56798 authenticated as S1004
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(unauthenticated) 127.0.0.1:56832(unauthenticated) (total 7)
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(unauthenticated) 127.0.0.1:56832(unauthenticated) 127.0.0.1:56848(unauthenticated) (total 8)
+[thread] client 127.0.0.1:56832 connected
+[thread] client 127.0.0.1:56816 connected
+[thread] client 127.0.0.1:56848 connected
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(unauthenticated) 127.0.0.1:56848(unauthenticated) (total 8)
+[auth] 127.0.0.1:56816 authenticated as S1006
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(unauthenticated) 127.0.0.1:56848(S1008) (total 8)
+[auth] 127.0.0.1:56848 authenticated as S1008
+[server] connected clients: 127.0.0.1:56780(S1001) 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(S1007) 127.0.0.1:56848(S1008) (total 8)
+[auth] 127.0.0.1:56832 authenticated as S1007
+[register] S1001 registered for 102 Cybersecurity Seminar (1/4)
+[register] S1002 registered for 102 Cybersecurity Seminar (2/4)
+[register] S1008 registered for 102 Cybersecurity Seminar (3/4)
+[register] S1007 registered for 102 Cybersecurity Seminar (4/4)
+[register] S1006 registered for 102 Cybersecurity Seminar (5/4)
+[register] S1005 registered for 102 Cybersecurity Seminar (6/4)
+[register] S1003 registered for 102 Cybersecurity Seminar (7/4)
+[register] S1004 registered for 102 Cybersecurity Seminar (8/4)
+[thread] client 127.0.0.1:56780 disconnected
+[server] connected clients: 127.0.0.1:56782(S1002) 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(S1007) 127.0.0.1:56848(S1008) (total 7)
+[thread] client 127.0.0.1:56782 disconnected
+[server] connected clients: 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(S1007) 127.0.0.1:56848(S1008) (total 6)
+[thread] client 127.0.0.1:56848 disconnected
+[thread] client 127.0.0.1:56832 disconnected
+[server] connected clients: 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) 127.0.0.1:56832(S1007) (total 5)
+[server] connected clients: 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) 127.0.0.1:56816(S1006) (total 4)
+[thread] client 127.0.0.1:56816 disconnected
+[server] connected clients: 127.0.0.1:56796(S1003) 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) (total 3)
+[thread] client 127.0.0.1:56796 disconnected
+[thread] client 127.0.0.1:56804 disconnected
+[server] connected clients: 127.0.0.1:56798(S1004) 127.0.0.1:56804(S1005) (total 2)
+[server] connected clients: 127.0.0.1:56798(S1004) (total 1)
+[thread] client 127.0.0.1:56798 disconnected
+[server] connected clients: (total 0)
+[server] connected clients: 127.0.0.1:56858(unauthenticated) (total 1)
+[thread] client 127.0.0.1:56858 connected
+[server] connected clients: 127.0.0.1:56858(S1001) (total 1)
+[auth] 127.0.0.1:56858 authenticated as S1001
+[thread] client 127.0.0.1:56858 disconnected
+[server] connected clients: (total 0)
