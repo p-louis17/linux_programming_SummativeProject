@@ -1,21 +1,3 @@
-/*
- * server.c  (Stage 4: events and registration)
- *
- * What it does so far:
- *   - creates a TCP socket, binds it to a port, listens
- *   - accepts clients in a loop, one POSIX thread per client
- *   - keeps a mutex-protected list of connected clients
- *   - authenticates students against a file of registered IDs
- *   - keeps a table of events protected by a mutex
- *   - after AUTH_OK, sends the event list, then serves the commands
- *       LIST            send the event list again
- *       REGISTER <id>   register the student for an event
- *       QUIT            say goodbye and close
- *
- * Build: gcc -Wall -Wextra -pthread -o server server.c
- * Run:   ./server 8080 students.txt
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

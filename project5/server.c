@@ -1,31 +1,3 @@
-/*
- * server.c  (Stage 7: demo switches added)
- *
- * What it does:
- *   - creates a TCP socket, binds it to a port, listens
- *   - accepts clients in a loop, one POSIX thread per client
- *   - keeps a mutex-protected list of connected clients
- *   - authenticates students against a file of registered IDs
- *   - keeps a table of events protected by a mutex
- *   - after AUTH_OK, sends the event list, then serves the commands
- *       LIST            send the event list again
- *       REGISTER <id>   register the student for an event
- *       QUIT            say goodbye and close
- *
- * Normal build:
- *   gcc -Wall -Wextra -pthread -o server server.c
- *
- * Demo builds (used only to prove the race is handled):
- *   gcc -Wall -Wextra -pthread -DDEMO_DELAY -o server_demo server.c
- *       pauses inside the registration step to widen the race window,
- *       the mutex is still in place, so capacity must still hold
- *   gcc -Wall -Wextra -pthread -DDEMO_DELAY -DNO_LOCK -o server_broken server.c
- *       same pause but WITHOUT the mutex, broken on purpose, to show what
- *       the race looks like when shared data is not protected
- *
- * Run:   ./server 8080 students.txt
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -61,7 +33,6 @@
 #define EVENTS_UNLOCK()   pthread_mutex_unlock(&events_mutex)
 #endif
 
-/* One slot in the connected clients list. */
 typedef struct {
     int  fd;                           /* socket descriptor of this client */
     char ip[INET_ADDRSTRLEN];          /* client address as text */
@@ -86,8 +57,6 @@ enum { RESULT_OK, RESULT_DUPLICATE, RESULT_FULL, RESULT_INVALID };
 static client_t        clients[MAX_CLIENTS];
 static pthread_mutex_t clients_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-/* Shared data 2: the event table. Every access to count and registered[]
- * must hold events_mutex. id, name and capacity never change after startup. */
 static event_t events[MAX_EVENTS] = {
     { 101, "AI Workshop",           5, 0, {{0}} },
     { 102, "Cybersecurity Seminar", 4, 0, {{0}} },
@@ -95,8 +64,6 @@ static event_t events[MAX_EVENTS] = {
 };
 static pthread_mutex_t events_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-/* Registered students. Filled once in main before any thread exists,
- * and only read afterwards, so no mutex is needed. */
 static char students[MAX_STUDENTS][STUDENT_ID_SIZE];
 static int  student_count = 0;
 
@@ -244,9 +211,6 @@ static int recv_line(int fd, char *buf, size_t size)
     return (int)len;
 }
 
-/* Sends every event as "EVENT id|name|capacity|registered", then "END".
- * The lines are built while holding the lock, but sent after releasing it,
- * so a slow client can never block other students' registrations. */
 static int send_event_list(int fd)
 {
     char lines[MAX_EVENTS][LINE_SIZE];
@@ -265,8 +229,6 @@ static int send_event_list(int fd)
     return send_line(fd, "END");
 }
 
-/* Finds an event by ID. Returns NULL if there is no such event.
- * Safe without the lock, because id never changes after startup. */
 static event_t *find_event(int event_id)
 {
     for (int i = 0; i < MAX_EVENTS; i++) {
@@ -276,11 +238,6 @@ static event_t *find_event(int event_id)
     return NULL;
 }
 
-/* Tries to register a student for an event.
- * The whole sequence (duplicate check, capacity check, insert) runs inside
- * ONE critical section. That is what guarantees two students can never both
- * take the last remaining place.
- * name_out receives the event name, count_out the count after the attempt. */
 static int register_for_event(const char *student, int event_id,
                               char *name_out, size_t name_size,
                               int *count_out, int *capacity_out)
@@ -311,13 +268,8 @@ static int register_for_event(const char *student, int event_id,
         result = RESULT_FULL;
     } else {
 #ifdef DEMO_DELAY
-        /* Demo only: pause between the capacity check and the insert, so
-         * other threads have time to reach the same check. With the mutex
-         * they wait here, without it they all pass the check. */
         usleep(DEMO_DELAY_US);
 #endif
-        /* The index guard only matters in the NO_LOCK demo build, where
-         * count can overshoot, and keeps the array write in bounds. */
         if (ev->count < MAX_CAPACITY)
             snprintf(ev->registered[ev->count], STUDENT_ID_SIZE, "%s", student);
         ev->count++;
@@ -387,11 +339,9 @@ static void *client_thread(void *arg)
     printf("[thread] client %s:%d connected\n", clients[slot].ip, clients[slot].port);
     fflush(stdout);
 
-    /* Authentication: the very first line must be a registered student ID.
-     * Nothing else is reachable until this check passes. */
     int n = recv_line(fd, id, sizeof(id));
     if (n < 0)
-        goto done;                      /* left before sending an ID */
+        goto done;                   
 
     if (!is_registered(id)) {
         printf("[auth] %s:%d rejected, unknown ID '%s'\n",
@@ -412,8 +362,6 @@ static void *client_thread(void *arg)
     if (send_event_list(fd) < 0)
         goto done;
 
-    /* Command loop. recv_line returns -1 when the client disconnects,
-     * which ends the loop and falls through to the cleanup below. */
     for (;;) {
         n = recv_line(fd, line, sizeof(line));
         if (n < 0)
@@ -474,7 +422,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /* Allow quick restarts without "Address already in use". */
     int yes = 1;
     setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes));
 
@@ -491,7 +438,6 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /* 3. Listen. The backlog of 10 queues clients that arrive together. */
     if (listen(listen_fd, 10) < 0) {
         perror("listen");
         close(listen_fd);
@@ -501,7 +447,6 @@ int main(int argc, char *argv[])
     printf("[server] listening on port %d\n", port);
     fflush(stdout);
 
-    /* 4. Accept loop: one thread per client. */
     for (;;) {
         struct sockaddr_in client_addr;
         socklen_t addr_len = sizeof(client_addr);
@@ -521,8 +466,6 @@ int main(int argc, char *argv[])
             continue;
         }
 
-        /* Pass the slot to the thread through the heap so each thread
-         * gets its own copy of the value. */
         int *arg = malloc(sizeof(int));
         *arg = slot;
 

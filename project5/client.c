@@ -1,31 +1,3 @@
-/*
- * server.c  (Stage 7: demo switches added)
- *
- * What it does:
- *   - creates a TCP socket, binds it to a port, listens
- *   - accepts clients in a loop, one POSIX thread per client
- *   - keeps a mutex-protected list of connected clients
- *   - authenticates students against a file of registered IDs
- *   - keeps a table of events protected by a mutex
- *   - after AUTH_OK, sends the event list, then serves the commands
- *       LIST            send the event list again
- *       REGISTER <id>   register the student for an event
- *       QUIT            say goodbye and close
- *
- * Normal build:
- *   gcc -Wall -Wextra -pthread -o server server.c
- *
- * Demo builds (used only to prove the race is handled):
- *   gcc -Wall -Wextra -pthread -DDEMO_DELAY -o server_demo server.c
- *       pauses inside the registration step to widen the race window,
- *       the mutex is still in place, so capacity must still hold
- *   gcc -Wall -Wextra -pthread -DDEMO_DELAY -DNO_LOCK -o server_broken server.c
- *       same pause but WITHOUT the mutex, broken on purpose, to show what
- *       the race looks like when shared data is not protected
- *
- * Run:   ./server 8080 students.txt
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

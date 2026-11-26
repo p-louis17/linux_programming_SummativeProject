@@ -1,19 +1,3 @@
-; ============================================================================
-; sensor_stats.asm
-; Assembler : NASM (Intel syntax)      Platform: Linux x86-64, raw syscalls
-; Purpose   : Read sensor_readings.txt, validate each line as an integer in
-;             0..100, then print count, sum, min and max statistics.
-;
-; Register map (kept alive for the whole run; syscall only clobbers rax,rcx,r11)
-;   r12 = total records        r13 = valid count      r14 = invalid count
-;   r15 = sum of valid values
-;   rbx = value of the record being parsed (built digit by digit)
-;   r8  = number of digits seen in the current record
-;   r9  = "bad" flag for the current record (1 = invalid character or > 100)
-;   r10 = "has content" flag (1 = at least one non CR/LF char seen on this line)
-;   rsi = pointer to next character in buffer, rcx = characters left in chunk
-; ============================================================================
-
 global _start
 
 SYS_READ   equ 0

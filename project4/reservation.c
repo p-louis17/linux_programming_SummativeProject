@@ -1,85 +1,3 @@
-/*
- * reservation.c
- * Multithreaded Library Book Reservation System (POSIX threads, C)
- *
- * Three threads cooperate through one shared circular queue:
- *   Student thread (producer): submits one reservation per second.
- *   Staff thread (consumer):   processes one reservation every 3 seconds.
- *   Monitor thread:            prints statistics every 4 seconds.
- *
- * Build: gcc -Wall -Wextra -pthread -o reservation reservation.c
- * Run:   ./reservation
- *
- * ======================= CODE DOCUMENTATION =======================
- *
- * 1. How shared memory is protected
- *    All shared data (the queue, head, tail, count and the four
- *    statistics counters) is stored in a single struct, 'lib'. One mutex,
- *    lib.lock, protects the whole struct. The rule used everywhere in the
- *    program is that no thread reads or writes a field of 'lib' unless it
- *    currently holds the mutex. Data that only one thread uses, such as the
- *    local Reservation copy in each thread, needs no protection.
- *
- * 2. How mutex locking and unlocking are applied
- *    Every access to shared data is wrapped like this:
- *        pthread_mutex_lock(&lib.lock);
- *        ... read or update shared data ...
- *        pthread_mutex_unlock(&lib.lock);
- *    The lock is held for as short a time as possible. The slow work, the
- *    1 second submit delay and the 3 second processing delay, is done
- *    outside the lock so the other threads are never blocked by a sleeping
- *    thread. The mutex is initialized in library_init() and destroyed in
- *    library_destroy() after all threads have been joined.
- *
- * 3. How condition variables coordinate thread execution
- *    Three condition variables are used:
- *      not_full:      the producer waits on it when the queue is full; the
- *                     consumer signals it after removing a request.
- *      not_empty:     the consumer waits on it when the queue is empty; the
- *                     producer signals it after adding a request.
- *      finished_cond: the monitor waits on it (with a timeout) between
- *                     reports; the consumer broadcasts it when the last
- *                     reservation is processed.
- *    pthread_cond_wait atomically releases the mutex and puts the thread to
- *    sleep, and re-acquires the mutex before returning. Each wait is placed
- *    inside a 'while' loop, not an 'if', so the condition is re-checked
- *    after every wakeup (protects against spurious wakeups and against
- *    another thread changing the queue first).
- *
- * 4. How full and empty queue situations are handled
- *    Full: the producer runs 'while (count == QUEUE_CAPACITY)' and waits on
- *    not_full. It only inserts when count < 5, so the queue never exceeds
- *    its capacity.
- *    Empty: the consumer runs 'while (count == 0)' and waits on not_empty.
- *    It only removes when count > 0, so nothing is ever removed from an
- *    empty queue.
- *    The queue is a circular buffer: head and tail wrap around using
- *    modulo QUEUE_CAPACITY.
- *
- * 5. How reservation requests are approved or rejected
- *    After a request is removed and the 3 second processing delay has
- *    passed, the consumer checks the book ID. Even IDs are available and
- *    the reservation is approved; odd IDs are unavailable and the
- *    reservation is rejected. The matching counter (approved or rejected)
- *    and the processed counter are updated while holding the mutex.
- *
- * 6. How the monitoring thread safely accesses shared information
- *    The monitor takes the same mutex before reading the counters and the
- *    queue size, so it always sees a consistent snapshot and never a
- *    half-updated value. Between reports it waits with
- *    pthread_cond_timedwait, which releases the mutex while sleeping, so it
- *    does not block the producer or the consumer.
- *
- * 7. How the application terminates all threads safely
- *    The producer exits its loop after submitting 15 requests. The consumer
- *    exits its loop after processing 15 requests; on the last one it sets
- *    lib.finished = 1 and broadcasts finished_cond, which wakes the monitor
- *    immediately. The monitor sees the flag, prints a final report and
- *    returns. main() then calls pthread_join on all three threads, so
- *    nothing is destroyed while a thread is still running, and finally
- *    calls library_destroy() to free the mutex and condition variables.
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -153,23 +71,11 @@ void library_destroy(void)
     pthread_cond_destroy(&lib.finished_cond);
 }
 
-/*
- * Student thread (producer).
- * Generates TOTAL_RESERVATIONS requests, one per second, and places them
- * in the shared circular buffer. Blocks while the buffer is full.
- */
 void *producer(void *arg)
 {
     (void)arg;  /* unused */
 
     for (int i = 1; i <= TOTAL_RESERVATIONS; i++) {
-        /*
-         * Simulate the 1 second it takes to submit a request.
-         * This is done BEFORE taking the lock so the other threads
-         * are not blocked while the producer is only sleeping.
-         * Only one producer exists, so the loop counter is a safe
-         * unique incremental reservation ID.
-         */
         sleep(1);
 
         Reservation r;
@@ -185,13 +91,6 @@ void *producer(void *arg)
                    lib.count, QUEUE_CAPACITY, r.reservation_id, r.book_id);
         }
 
-        /*
-         * 'while', not 'if': after waking up, the condition must be
-         * checked again, because another thread may have changed the
-         * queue or the wakeup may be spurious.
-         * pthread_cond_wait unlocks the mutex while sleeping and
-         * locks it again before returning.
-         */
         while (lib.count == QUEUE_CAPACITY) {
             pthread_cond_wait(&lib.not_full, &lib.lock);
         }
@@ -214,11 +113,6 @@ void *producer(void *arg)
     return NULL;
 }
 
-/*
- * Library staff thread (consumer).
- * Removes exactly TOTAL_RESERVATIONS requests from the queue, one at a time,
- * and approves or rejects each one. Blocks while the queue is empty.
- */
 void *consumer(void *arg)
 {
     (void)arg;  /* unused */
@@ -234,11 +128,6 @@ void *consumer(void *arg)
             printf("[Staff]   Queue EMPTY. Waiting for reservations...\n");
         }
 
-        /*
-         * Wait while there is nothing to remove. This guarantees a
-         * request is never taken from an empty queue. The 'while'
-         * re-checks the condition after every wakeup.
-         */
         while (lib.count == 0) {
             pthread_cond_wait(&lib.not_empty, &lib.lock);
         }
@@ -250,12 +139,6 @@ void *consumer(void *arg)
 
         /* Tell a waiting producer that there is space again. */
         pthread_cond_signal(&lib.not_full);
-
-        /*
-         * Unlock BEFORE the slow work. Processing takes 3 seconds and uses
-         * only our local copy 'r', so no shared data is involved. Holding
-         * the lock here would freeze the producer and the monitor.
-         */
         pthread_mutex_unlock(&lib.lock);
 
         printf("[Staff]   Processing reservation #%d for book %d...\n",
@@ -279,10 +162,6 @@ void *consumer(void *arg)
                    r.reservation_id, r.book_id);
         }
 
-        /*
-         * After the last reservation, mark the system as finished and wake
-         * the monitor so it can stop.
-         */
         if (lib.processed == TOTAL_RESERVATIONS) {
             lib.finished = 1;
             pthread_cond_broadcast(&lib.finished_cond);
@@ -306,12 +185,6 @@ static void print_report(const char *title)
     printf("=====================================\n\n");
 }
 
-/*
- * Monitoring thread.
- * Prints the statistics every MONITOR_INTERVAL seconds until the consumer
- * sets lib.finished. It waits on a condition variable with a timeout
- * instead of calling sleep(), so it can wake up immediately at the end.
- */
 void *monitor(void *arg)
 {
     (void)arg;  /* unused */
@@ -324,11 +197,6 @@ void *monitor(void *arg)
         clock_gettime(CLOCK_REALTIME, &deadline);
         deadline.tv_sec += MONITOR_INTERVAL;
 
-        /*
-         * Sleep until the deadline passes (ETIMEDOUT) or the consumer
-         * signals that everything is finished. The mutex is released
-         * while sleeping, so the other threads keep working.
-         */
         int rc = 0;
         while (!lib.finished && rc != ETIMEDOUT) {
             rc = pthread_cond_timedwait(&lib.finished_cond, &lib.lock, &deadline);
@@ -338,11 +206,9 @@ void *monitor(void *arg)
             break;
         }
 
-        /* We hold the lock here, so the numbers form a consistent snapshot. */
         print_report("MONITOR REPORT");
     }
 
-    /* Final report once everything has been processed. */
     print_report("FINAL REPORT");
 
     pthread_mutex_unlock(&lib.lock);
